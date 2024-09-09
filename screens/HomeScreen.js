@@ -1,45 +1,72 @@
+import React, { useState, useEffect } from "react";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Button, StyleSheet, Text, View, SafeAreaView, Dimensions } from "react-native";
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {height } = Dimensions.get('window');
+
+  const [currentProtein, setCurrentProtein] = useState(100);
+  const [goalProtein, setGoalProtein] = useState('');
+
+  const [currentCalorie, setCurrentCalorie] = useState(4000);
+  const [goalCalorie, setGoalCalorie] = useState('');
+
+
+  useEffect(() => {
+    if (route.params?.newGoalProtein) {
+      setGoalProtein(route.params.newGoalProtein);
+    }
+    if (route.params?.newGoalCalorie) {
+      setGoalCalorie(route.params.newGoalCalorie);
+    }
+  }, [route.params?.newGoalProtein, route.params?.newGoalCalorie]);
+
   return (
-      <View
-        style={[
-          {
-            flex: 1,
-            alignContent: 'space-around',
-            alignItems: "center"
-          },
-        ]}
-      >
-        <View style={[{ alignItems: "center" }]}>
-          <Text>Protein</Text>
-          <AnimatedCircularProgress
-            size={200}
-            width={3}
-            fill={50}
-            tintColor="#00e0ff"
-            backgroundColor="#3d5875"
-          >
-            {(fill) => <Text>{50}</Text>}
-          </AnimatedCircularProgress>
-        </View>
-        <View style={[{ alignItems: "center" }]}>
-          <Text>Calories</Text>
-          <AnimatedCircularProgress
-            size={200}
-            width={3}
-            fill={50}
-            tintColor="#00e0ff"
-            backgroundColor="#3d5875"
-          >
-            {(fill) => <Text>{50}</Text>}
-          </AnimatedCircularProgress>
-        </View>
+    <SafeAreaView
+      style={[
+        {
+          justifyContent: 'space-evenly',
+          height: height/1.25,
+        },
+      ]}
+    >
+
+      <View style={[{ alignItems: "center" }]}>
+        <Text style={styles.titleText}>Protein</Text>
+        <AnimatedCircularProgress
+          size={200}
+          width={6}
+          fill={(currentProtein/goalProtein) * 100}
+          rotation={0}
+          tintColor="#00e0ff"
+          backgroundColor="#3d5875"
+        >
+          {(fill) => <Text style={styles.titleText}>{currentProtein + " g"}</Text>}
+        </AnimatedCircularProgress>
       </View>
+      
+      <View style={[{ alignItems: "center" }]}>
+          <Text style={styles.titleText}>Calories</Text>
+          <AnimatedCircularProgress
+            size={200}
+            width={6}
+            fill={(currentCalorie/goalCalorie) * 100}
+            rotation={0}
+            tintColor="#00e0ff"
+            backgroundColor="#3d5875"
+          >
+            {(fill) => <Text style = {styles.titleText}>{currentCalorie + " cal"}</Text>}
+          </AnimatedCircularProgress>
+        </View>
+    </SafeAreaView>
   );
 }
-//hello
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 30,
+  },
+});
