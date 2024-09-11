@@ -4,25 +4,14 @@ import { Button, StyleSheet, Text, View, SafeAreaView, Dimensions } from "react-
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
-  const route = useRoute();
   const {height } = Dimensions.get('window');
 
-  const [currentProtein, setCurrentProtein] = useState(100);
-  const [goalProtein, setGoalProtein] = useState('');
+  const [currentProtein, setCurrentProtein] = useState(0);
+  const [goalProtein, setGoalProtein] = useState(0);
 
-  const [currentCalorie, setCurrentCalorie] = useState(4000);
-  const [goalCalorie, setGoalCalorie] = useState('');
+  const [currentCalorie, setCurrentCalorie] = useState(0);
+  const [goalCalorie, setGoalCalorie] = useState(0);
 
-
-  useEffect(() => {
-    if (route.params?.newGoalProtein) {
-      setGoalProtein(route.params.newGoalProtein);
-    }
-    if (route.params?.newGoalCalorie) {
-      setGoalCalorie(route.params.newGoalCalorie);
-    }
-  }, [route.params?.newGoalProtein, route.params?.newGoalCalorie]);
 
   return (
     <SafeAreaView

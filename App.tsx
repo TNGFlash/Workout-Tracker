@@ -6,7 +6,9 @@ import DataScreen from './screens/DataScreen';
 import HomeScreen from './screens/HomeScreen';
 import HistoryScreen from './screens/HistoryScreen';
 
-
+//git add .
+//git commit -m "message here"
+//git push Workout main
 
 
 

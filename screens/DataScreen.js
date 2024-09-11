@@ -3,21 +3,11 @@ import { SafeAreaView, StyleSheet, TextInput, Text, View, Button } from 'react-n
 
 const DataScreen = ({ navigation }) => {
     const [name, setName] = useState('');
-    const [goalProtein, setGoalProtein] = useState('');
-    const [goalCalorie, setGoalCalorie] = useState('');
+    const [goalProtein, setGoalProtein] = useState(0);
+    const [goalCalorie, setGoalCalorie] = useState(0);
     const [email, setEmail] = useState('');
 
     const handleSave = () => {
-        // Convert goalProtein to a number
-        const proteinGoal = parseInt(goalProtein, 10);
-        // Navigate back to HomeScreen with the new goalProtein value
-        navigation.navigate('Home', { newGoalProtein: proteinGoal });
-
-        const calorieGoal = parseInt(goalCalorie, 10);
-        
-        navigation.navigate('Home', { newGoalCalorie: calorieGoal });
-
-
         
     };
 
